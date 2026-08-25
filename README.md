@@ -8,7 +8,7 @@ A web-based donation platform where users can browse causes (Education, Health, 
 - **Database:** MySQL
 
 ## Team & Modules
-| Member | Module | Status |
+| Member | Module |
 |---|---|---|
 | Taiba Asif | Category Selection (homepage, cause cards) 
 | Eiman Asmat| Donation Form (form + client/server validation) 
