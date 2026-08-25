@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.site-header {
+    text-align: center;
+    background: linear-gradient(135deg, #2b6cb0, #319795);
+    color: white;
+    padding: 50px 20px;
+}
+
+.site-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.site-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.category-grid {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.category-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.category-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #2b6cb0;
+}
+
+.category-card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+    min-height: 60px;
+}
+
+.donate-btn {
+    display: inline-block;
+    background-color: #319795;
+    color: white;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.donate-btn:hover {
+    background-color: #2c7a7b;
+}
+
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 0.85rem;
+}

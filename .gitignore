@@ -1,0 +1,22 @@
+# Database credentials
+includes/db_config.php
+
+# Logs and temp files
+logs/
+temp/
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Composer
+vendor/
+
+# Environment files
+.env
+.env.local
