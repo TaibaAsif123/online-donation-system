@@ -6,14 +6,13 @@ A web-based donation platform where users can browse causes (Education, Health, 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** PHP (form processing, validation)
 - **Database:** MySQL
-
 ## Team & Modules
 | Member | Module |
-|---|---|---|
-| Taiba Asif | Category Selection (homepage, cause cards) 
-| Eiman Asmat| Donation Form (form + client/server validation) 
-| Rabia Noor | Database & Donor Management (schema, connection, queries) 
-| Areeba Noor| Admin Report (dashboard, donation summaries)
+|---|---|
+|Taiba Asif| Category Selection (homepage, cause cards) |
+|Eiman Asmat| Donation Form (form + client/server validation) |
+|Rabia Noor| Database & Donor Management (schema, connection, queries) |
+|Areeba Noor| Admin Report (dashboard, donation summaries) |
 
 ## Setup Instructions (for every team member)
 
