@@ -134,28 +134,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['message'] = 'Message cannot be longer than 300 characters.';
     }
 
-    // --- Everything valid → save it ---
+    // --- Everything valid → save it as Pending, then go to the payment step ---
     if (!$errors) {
         $amount = round((float) $values['amount'], 2);
 
         $donor_id = getOrCreateDonor($conn, $values['donor_name'], $values['donor_email']);
 
-        // Payment is simulated for this project, so it is recorded as successful.
+        // The row is created as "Pending". payment.php flips it to
+        // Success or Failed once the simulated gateway finishes.
         $ok = insertDonation(
             $conn,
             $donor_id,
             (int) $cause['cause_id'],
             $amount,
             $values['payment_method'],
-            'Success'
+            'Pending'
         );
 
         if ($ok) {
             // Post/Redirect/Get so a refresh cannot donate twice.
             $donation_id = $conn->insert_id;
-            $_SESSION['last_donation_id'] = $donation_id;
-            $_SESSION['donor_message']    = $values['message'];
-            header('Location: confirmation.php?donation_id=' . $donation_id);
+            $_SESSION['pending_donation_id'] = $donation_id;
+            $_SESSION['donor_message']       = $values['message'];
+            header('Location: payment.php?donation_id=' . $donation_id);
             exit;
         }
 
@@ -328,7 +329,7 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
             <p class="error-text" id="err-message"><?php echo e($errors['message'] ?? ''); ?></p>
           </div>
 
-          <button type="submit" class="btn btn-block">Complete donation</button>
+          <button type="submit" class="btn btn-block">Continue to payment</button>
 
           <p class="fine-print">
             Payment is simulated for this academic project — no real money is transferred
@@ -361,9 +362,9 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
         <div class="trust-card">
           <h3>What happens next</h3>
           <ol class="trust-list">
-            <li>Your donation is recorded against this cause.</li>
-            <li>You land on a confirmation page with a reference number.</li>
-            <li>It appears in the admin report straight away.</li>
+            <li>Your donation is saved as <em>Pending</em>.</li>
+            <li>You confirm it on the payment screen.</li>
+            <li>You get a receipt with a reference number.</li>
           </ol>
         </div>
       </aside>

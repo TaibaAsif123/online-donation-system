@@ -323,7 +323,101 @@ textarea.input { resize: vertical; min-height: 84px; }
   font-size: .78rem;
   font-weight: 700;
 }
-.badge--ok { background: var(--brand-lt); color: var(--brand-dk); }
+.badge--ok      { background: var(--brand-lt);  color: var(--brand-dk); }
+.badge--pending { background: var(--food-lt);   color: #8a5a10; }
+.badge--fail    { background: var(--health-lt); color: #7a1c2e; }
+
+/* ---------- 9b. Step bar ---------- */
+.steps-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  max-width: 46rem;
+  margin: 0 auto 1.5rem;
+  counter-reset: sb;
+}
+.steps-bar li {
+  position: relative;
+  padding-left: 1.85rem;
+  font-size: .87rem;
+  color: var(--ink-3);
+  counter-increment: sb;
+}
+.steps-bar li::before {
+  content: counter(sb);
+  position: absolute;
+  left: 0; top: -.05rem;
+  display: grid;
+  place-items: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--bg-3);
+  color: var(--ink-3);
+  font-size: .74rem;
+  font-weight: 800;
+}
+.steps-bar li.is-done { color: var(--ink-2); }
+.steps-bar li.is-done::before {
+  content: "✓";
+  background: var(--brand-lt);
+  color: var(--brand);
+}
+.steps-bar li.is-current { color: var(--ink); font-weight: 700; }
+.steps-bar li.is-current::before { background: var(--accent, var(--brand)); color: #fff; }
+
+/* ---------- 9c. Simulated payment gateway ---------- */
+.gateway {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.25rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 520px) { .gateway { padding: 1.4rem; } }
+
+.gateway h1 { font-size: clamp(1.45rem, 3.6vw, 1.9rem); letter-spacing: -.02em; }
+.gateway .lede { font-size: .98rem; }
+
+.gateway-banner {
+  display: grid;
+  gap: .2rem;
+  margin-bottom: 1.5rem;
+  padding: .85rem 1.05rem;
+  border-radius: var(--radius-sm);
+  background: var(--food-lt);
+  border: 1px dashed color-mix(in srgb, var(--food) 45%, transparent);
+}
+.gateway-banner strong { color: #8a5a10; font-size: .9rem; }
+.gateway-banner span { font-size: .84rem; color: var(--ink-2); }
+
+.gateway .receipt-list { margin: 1.75rem 0 1rem; }
+
+.gateway-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-lt);
+}
+.gateway-total span { font-size: .9rem; font-weight: 600; color: var(--ink-2); }
+.gateway-total strong {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -.02em;
+}
+
+.gateway-actions { display: grid; gap: .6rem; margin-bottom: 1rem; }
+.gateway-actions .btn-ghost { background: transparent; }
+.gateway-actions .btn:disabled { opacity: .6; cursor: progress; }
+
+.receipt-tick--fail { background: var(--health-lt); }
+.receipt-tick--fail svg { stroke: var(--health); }
 
 .donor-message {
   margin: 0 0 2rem;

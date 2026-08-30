@@ -31,6 +31,7 @@ if ($donation_id > 0 && $allowed) {
 }
 
 $donor_message = $_SESSION['donor_message'] ?? '';
+$failed        = $donation && $donation['payment_status'] !== 'Success';
 
 function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
 ?>
@@ -78,7 +79,28 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
 
 <?php else: ?>
 
+    <ol class="steps-bar" aria-label="Progress">
+      <li class="is-done">Your details</li>
+      <li class="is-done">Payment</li>
+      <li class="is-current" aria-current="step">Confirmation</li>
+    </ol>
+
     <section class="receipt">
+
+<?php if ($failed): ?>
+
+      <div class="receipt-tick receipt-tick--fail" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>
+      </div>
+
+      <h1>Payment cancelled</h1>
+      <p class="lede">
+        Your donation to <strong><?php echo e($donation['cause_name']); ?></strong> was recorded as
+        <strong>Failed</strong>, so nothing was collected. You can start again whenever you like.
+      </p>
+
+<?php else: ?>
+
       <div class="receipt-tick" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 7"/></svg>
       </div>
@@ -88,6 +110,8 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
         Your donation to <strong><?php echo e($donation['cause_name']); ?></strong> has been recorded.
         A reference number is below — keep it if you need to ask us about this donation.
       </p>
+
+<?php endif; ?>
 
       <dl class="receipt-list">
         <div>
@@ -108,7 +132,7 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
         </div>
         <div>
           <dt>Status</dt>
-          <dd><span class="badge badge--ok"><?php echo e($donation['payment_status']); ?></span></dd>
+          <dd><span class="badge <?php echo $failed ? 'badge--fail' : 'badge--ok'; ?>"><?php echo e($donation['payment_status']); ?></span></dd>
         </div>
         <div>
           <dt>Date</dt>
@@ -120,7 +144,7 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
         </div>
       </dl>
 
-      <?php if ($donor_message !== ''): ?>
+      <?php if ($donor_message !== '' && !$failed): ?>
         <blockquote class="donor-message">
           <p><?php echo e($donor_message); ?></p>
           <footer>— your message to the team</footer>
@@ -128,8 +152,12 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
       <?php endif; ?>
 
       <div class="receipt-actions">
-        <a class="btn" href="index.php#causes">Donate to another cause</a>
-        <button type="button" class="btn btn-ghost" onclick="window.print()">Print receipt</button>
+        <?php if ($failed): ?>
+          <a class="btn" href="index.php#causes">Try again</a>
+        <?php else: ?>
+          <a class="btn" href="index.php#causes">Donate to another cause</a>
+          <button type="button" class="btn btn-ghost" onclick="window.print()">Print receipt</button>
+        <?php endif; ?>
       </div>
 
       <p class="fine-print">
