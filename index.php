@@ -34,7 +34,7 @@
       <a href="index.php" class="is-active">Home</a>
       <a href="#causes">Causes</a>
       <a href="#how">How it works</a>
-      <a href="admin/report.php">Admin</a>
+      <a href="report.php">Admin</a>
       <a href="#causes" class="btn btn-sm">Donate</a>
     </nav>
   </div>
@@ -208,7 +208,7 @@
     <nav class="footer-links" aria-label="Footer">
       <a href="#causes">Causes</a>
       <a href="#how">How it works</a>
-      <a href="admin/report.php">Admin report</a>
+      <a href="report.php">Admin</a>
     </nav>
   </div>
   <div class="container footer-bottom">
